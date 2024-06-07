@@ -376,7 +376,7 @@
 				$.ajax({
 					url:"${ contextPath }/board/temp/delete.ajax",
 					method:"get",
-					data:{delBoardNoArr: delBoardNoArr},
+					data:{delBoardNoArr: delBoardNoArr},	// AJAX : traditional
 					success:function(result){
 						if(result == 'SUCCESS'){
 							greenAlert("공지사항 삭제서비스", "공지사항이 삭제되었습니다.");
