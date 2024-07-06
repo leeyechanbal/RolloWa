@@ -105,6 +105,19 @@ textarea:focus {
     background-color: rgb(255,247,208);
     border-color: rgb(255,247,208);
 }
+.page-item.active .page-linkn {
+    background-color: rgb(255,247,208);
+    border-color: rgb(255,247,208);
+}
+.page-item.active .page-link7 {
+    background-color: rgb(255,247,208);
+    border-color: rgb(255,247,208);
+}
+
+.page-item.active .page-linkall {
+    background-color: rgb(255,247,208);
+    border-color: rgb(255,247,208);
+}
 .page-link:hover,
 .page-link:focus{
     z-index: 5;
@@ -112,6 +125,158 @@ textarea:focus {
     background-color: rgb(255,247,208) !important;
     border-color: #0a0a0a;
 }
+.page-linkn:hover,
+.page-linkn:focus{
+    z-index: 5;
+    color: #000000 !important;
+    background-color: rgb(255,247,208) !important;
+    border-color: #0a0a0a;
+}
+.page-link7:hover,
+.page-link7:focus{
+    z-index: 5;
+    color: #000000 !important;
+    background-color: rgb(255,247,208) !important;
+    border-color: #0a0a0a;
+}
+.page-linku:hover,
+.page-linku:focus{
+    z-index: 5;
+    color: #000000 !important;
+    background-color: rgb(255,247,208) !important;
+    border-color: #0a0a0a;
+}
+.page-linkall:hover,
+.page-linkall:focus{
+    z-index: 5;
+    color: #000000 !important;
+    background-color: rgb(255,247,208) !important;
+    border-color: #0a0a0a;
+}
+
+.page-linku {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkuc {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkus {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkall {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkallc {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkalls {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-link7 {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-link7c {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-link7s {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkd {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+
+
+.page-linkn {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linknc {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkns {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-linkc {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+.page-links {
+    display: block;
+    padding: .375rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+}
+
 /* ---------------------------------------- 이예찬 ---------------------------------------- */
 .list-unstyled {
     padding-left: 0;
@@ -133,7 +298,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.pagination a {
     font-family: "Jua", sans-serif;
 }
 

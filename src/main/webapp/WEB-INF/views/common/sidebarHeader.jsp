@@ -688,11 +688,11 @@ $(document).ready(function(){
 						    </button>
 						    <div class="collapse" id="approval-collapse">
 						        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						            <li>
+						            <li id="apMain">
 						                <a href="${contextPath}/pay/noApprovalListMain.page"
 						                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">관리자홈</a>
 						            </li>
-						            <li>
+						            <li id="apList">
 						                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
 						                    data-bs-toggle="collapse" data-bs-target="#approval-collapseApproval" aria-expanded="false">
 						                    결재진행함
@@ -717,7 +717,7 @@ $(document).ready(function(){
 						            <li>
 						                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
 						                    data-bs-toggle="collapse" data-bs-target="#approval-collapsewriter" aria-expanded="false">
-						                    결재작성
+						                    결재신청서
 						                </button>
 						                <div class="collapse" id="approval-collapsewriter">
 						                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -760,6 +760,7 @@ $(document).ready(function(){
 						        </ul>
 						    </div>
 							</li>
+							
 							<!-- ------------------------------------------전자결재 End------------------------------------------------------ -->
                 <li class="border-top my-3"></li>
                 <li class="mb-1">
@@ -783,6 +784,7 @@ $(document).ready(function(){
             </ul>
         </div>
         
+        
         <div id="alram">
         	<button id="alram_btn" type="button" class="btn" style="margin-left: 430px;
     margin-bottom: 10px;">알림으로 이동하기</button>
@@ -791,8 +793,37 @@ $(document).ready(function(){
         <div class="b-example-divider b-example-vr"></div>
     	<!-- socket 통신을 위한 js -->
         <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+        
+        
+        <!------------------------- 전자결재 문희 영역--------------------------->
+         <script>
+        	$(document).ready(function(){
+        		
+        		$.ajax({
+        			url:"${contextPath}/pay/deptPay.do",
+        			type:"get",
+        			success:function(response){
+        				console.log("deptPayCode : ", response[0].positionCode);
+        				if(response.length > 0){
+        					if(response[0].positionCode == 'A'){
+        						$("#apList").css("display", "none");
+        						$("#apMain").css("display", "none");        						
+        					}
+        				}
+        				
+        			},
+        			error:function(){
+        				console.log("ajax통신실패");
+        			}
+        		})
+        		
+        	})
+       	 </script>
+				<!------------------------- 전자결재 문희 영역--------------------------->		
+        
+        
         <script>
-
+        
         /* ========================== "가림" 구역 ========================== */
            loginLogout = new SockJS("${contextPath}/onoff");
         /* ========================== "가림" 구역 ========================== */

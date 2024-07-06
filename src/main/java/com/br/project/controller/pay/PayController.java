@@ -833,6 +833,7 @@ public class PayController {
 		log.debug("items : {}", items);
 		log.debug("counts : {}", counts);
 		log.debug("sales : {}", sales);
+		
 		List<Map<String, Object>> list = new ArrayList<>();
 		
 			for(int i=0; i<items.size(); i++) {
@@ -844,7 +845,7 @@ public class PayController {
 					maps.put("salesAmount", sales.get(i));
 					list.add(maps);
 				}
-		}
+			}
 		
 		
 		int result = payService.mReportUpdate(map, list);
@@ -865,8 +866,8 @@ public class PayController {
 	@PostMapping("/gReportUpdate.do")
 	public String gReportUpdate(@RequestParam Map<String, Object> map, RedirectAttributes redirectAttributes
 							  , List<MultipartFile> uploadFiles,  String[] delFileNo
-							  , @RequestParam(value="referrer", defaultValue="null") List<String> referrerNo
-							  , @RequestParam(value="referrerName", defaultValue="null") List<String> referrerName) { 
+							  , @RequestParam(value="referrer", required=false) List<String> referrerNo
+							  , @RequestParam(required=false) List<String> referrerName) { 
 		
 		String approvalNo = (String)map.get("approvalNo");
 		
@@ -887,21 +888,21 @@ public class PayController {
 		}
 		
 		List<Map<String, Object>> referrerList = new ArrayList<>();
-		if(referrerNo != null &&!referrerNo.equals("null")) {
-			for(int i=0; i<referrerNo.size(); i++) {
-				Map<String, Object> refMap = new HashMap<>();
-				refMap.put("approvalNo", map.get("approvalNo"));
-				refMap.put("writerNo", map.get("payWriterNo"));
-				refMap.put("refNo", referrerNo.get(i));
-				refMap.put("refName", referrerName.get(i));
-				referrerList.add(refMap);
-			}
-		}
+		   if (referrerNo != null && !referrerNo.isEmpty()) {
+		        for (int i = 0; i < referrerNo.size(); i++) {
+		            Map<String, Object> refMap = new HashMap<>();
+		            refMap.put("approvalNo", map.get("approvalNo"));
+		            refMap.put("writerNo", map.get("writerNo"));
+		            refMap.put("refNo", referrerNo.get(i));
+		            refMap.put("refName", referrerName.get(i));
+		            referrerList.add(refMap);
+		        }
+		   }
 		
 		int result = payService.gReportUpdate(map, attachList, delFileNo, referrerList, approvalNo);
 		
 		redirectAttributes.addFlashAttribute("alertTitle", "게시글 수정 서비스");
-		if(result == 1 && uploadFiles.isEmpty() || result == attachList.size() && !uploadFiles.isEmpty()) {
+		if(result == 1 || result == attachList.size()) {
 			redirectAttributes.addFlashAttribute("alertMsg", "성공적으로 등록 되었습니다.");
 			redirectAttributes.addFlashAttribute("modalColor", "G");
 		}else {
@@ -942,15 +943,15 @@ public class PayController {
 		
 		
 		List<Map<String, Object>> referrerList = new ArrayList<>();
-		if(!referrerNo.equals("null")) {
-			for(int i=0; i<referrerNo.size(); i++) {
-				Map<String, Object> refMap = new HashMap<>();
-				refMap.put("writerNo", map.get("writerNo"));
-				refMap.put("refNo", referrerNo.get(i));
-				refMap.put("refName", referrerName.get(i));
-				referrerList.add(refMap);
-			}
-		}
+		   if (!"null".equals(referrerNo.get(0))) {
+		        for (int i = 0; i < referrerNo.size(); i++) {
+		            Map<String, Object> refMap = new HashMap<>();
+		            refMap.put("writerNo", map.get("writerNo"));
+		            refMap.put("refNo", referrerNo.get(i));
+		            refMap.put("refName", referrerName.get(i));
+		            referrerList.add(refMap);
+		        }
+		   }
 		
 		int result = payService.gReportInsert(map, attachList, referrerList);
 		
@@ -1037,16 +1038,15 @@ public class PayController {
 		log.debug("품목 : {}", list);
 		
 		List<Map<String, Object>> referrerList = new ArrayList<>();
-		if(!referrerNo.equals("null")) {
-			for(int i=0; i<referrerNo.size(); i++) {
-				Map<String, Object> refMap = new HashMap<>();
-				refMap.put("writerNo", map.get("writerNo"));
-				refMap.put("refNo", referrerNo.get(i));
-				refMap.put("refName", referrerName.get(i));
-				referrerList.add(refMap);
-			}
-		}
-		
+		   if (!"null".equals(referrerNo.get(0))) {
+		        for (int i = 0; i < referrerNo.size(); i++) {
+		            Map<String, Object> refMap = new HashMap<>();
+		            refMap.put("writerNo", map.get("writerNo"));
+		            refMap.put("refNo", referrerNo.get(i));
+		            refMap.put("refName", referrerName.get(i));
+		            referrerList.add(refMap);
+		        }
+		   }
 		
 		log.debug("referrerNo : {}", referrerNo);
 		log.debug("referrerList : {}", referrerList);
@@ -1336,9 +1336,9 @@ public class PayController {
 							    RedirectAttributes redirectAttributes,
 							    HttpSession session) {
 
-			String approvalNo = (String)map.get("approvalNo");
+		String approvalNo = (String)map.get("approvalNo");
 			// 품목, 규격, 수량, 단가, 가격, 기타 
-			List<Map<String, Object>> list = new ArrayList<>();
+		List<Map<String, Object>> list = new ArrayList<>();
 			
 			for(int i=0; i<pNames.size(); i++) {
 				if(pNames.get(i) != null && !pNames.get(i).equals("")) {
@@ -1355,17 +1355,16 @@ public class PayController {
 				}
 			}
 			
-			List<Map<String, Object>> referrerList = new ArrayList<>();
-			if(referrerNo != null &&!referrerNo.equals("null")) {
-				for(int i=0; i<referrerNo.size(); i++) {
-					Map<String, Object> refMap = new HashMap<>();
-					refMap.put("approvalNo", map.get("approvalNo"));
-					refMap.put("writerNo", map.get("payWriterNo"));
-					refMap.put("refNo", referrerNo.get(i));
-					refMap.put("refName", referrerName.get(i));
-					referrerList.add(refMap);
-				}
-			}
+		List<Map<String, Object>> referrerList = new ArrayList<>();
+		   if (!"null".equals(referrerNo.get(0))) {
+		        for (int i = 0; i < referrerNo.size(); i++) {
+		            Map<String, Object> refMap = new HashMap<>();
+		            refMap.put("writerNo", map.get("writerNo"));
+		            refMap.put("refNo", referrerNo.get(i));
+		            refMap.put("refName", referrerName.get(i));
+		            referrerList.add(refMap);
+		        }
+		   }
 			
 			
 			int result = payService.bReportUpdate(map, list, referrerList, approvalNo);
@@ -2092,7 +2091,36 @@ public class PayController {
 		
 		return map;
 	}
+
+
+	@RequestMapping("/collectAp.do")
+	public Model collectAp(int approvalNo, Model model) {
+		
+		int result = payService.collectAp(approvalNo);
+		
+		model.addAttribute("alertTitle", "게시글 서비스");
+		if(result > 0) {
+			model.addAttribute("alertMsg", "회수가 정상 처리되었습니다.");
+			model.addAttribute("modalColor", "G");
+		}
+		return model;
+		
+	}
 	
+	@ResponseBody
+	@GetMapping("/deptPay.do")
+	public List<MemberDeptDto> deptPay(HttpSession session) {
+		//회원정보조회용
+		int userNo = (int)((MemberDto)session.getAttribute("loginMember")).getUserNo();
+		String userName = payService.loginUserMember(userNo);	
+		Map<String, Object> mapUserMember = new HashMap<>();
+		mapUserMember.put("userName", userName);
+		mapUserMember.put("userNo", userNo);
+		List<MemberDeptDto> member = payService.selectloginUserDept(mapUserMember);
+		
+		return member;
+		
+	}
 	
 
 

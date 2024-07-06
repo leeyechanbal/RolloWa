@@ -168,6 +168,8 @@ th {
     margin: 30px;
 }
 #searchBox th td{text-align: center;}
+
+
 </style>
 
 </head>
@@ -505,7 +507,7 @@ $(document).on("click", "#okayBtn", function(){
                                 let span = "";
                                 if (response.length > 0) {
                                     span += "<table>";
-                                    span += "<tr><th>선택</th><th>팀 이름</th><th>직급</th><th>이름</th></tr>";
+                                    span += "<tr><th>선택</th><th>팀 이름</th><th>직급</th><th>사용자 이름</th></tr>";
                                     response.forEach(function(item) {
                                         span += "<tr id='searchTr'>";
                                         span += "<td><input type='checkbox' class='checkBox'></td>";
@@ -552,8 +554,8 @@ $(document).on("click", "#okayBtn", function(){
                         $(this).prop("checked", false);
                     } else {
                     	let userItemHTML ='<div class="userItem">' +
-									                        '<span class="teamName">' + teamName + '&nbsp;</span>' +
-									                        '<span class="positionName">' + positionName + '&nbsp;</span>' +
+									                        '<span class="teamName">' + teamName + '</span>' +
+									                        '<span class="positionName">' + positionName + '</span>' +
 									                        '<span class="userName">' + userName + '</span>' +
 									                        '<input type="hidden" class="checkuserNumber" value="' + userNumber + '">' +
 									                        '<span class="removeName">' + 
@@ -612,23 +614,25 @@ $(document).on("click", "#okayBtn", function(){
         });
     </script>
 
-
-
-
-	
-
        <!-- content 추가 -->
         <div class="content p-4">
             <!-- 프로필 영역 -->
             <div class="informations">
                 <!-- informations left area start -->
                 <div class="left_con">
-		                <form action="${contextPath}/pay/bReportInsert.do" method="post" id="myForm">
-		                   <input type="hidden" name="deptName" value="${member.get(0).teamName}">
+		                <form action="${contextPath}/pay/bReportUpdate.do" method="post" id="myForm">
+		                   <input type="hidden" name="deptName" value="${list.get(0).DEPARTMENT}">
+                       <input type="hidden" name="approvalNo" value="${list.get(0).APPROVAL_NO}">
+                       <input type="hidden" name="fixNo" value="${list.get(0).FIX_NO}">
+                       <input type="hidden" name="reportNo" value="${list.get(0).REPORT_NO}">
+                       <input type="hidden" name="reportType" value="${list.get(0).REPORT_TYPE}">
                        <input type="hidden" name="writerNo" value="${userNo}">
-                       <input type="hidden" name="firstApproval" class="hiddenSignName">
-											 <input type="hidden" name="middleApproval" class="hiddenSignName">
-											 <input type="hidden" name="finalApproval" class="hiddenSignName">
+                      <input type="hidden" name="firstApproval" value="${ list.get(0).FIRST_APPROVAL }" class="hiddenSignName">
+											 <input type="hidden" name="middleApproval" value="${ list.get(0).MIDDLE_APPROVAL }" class="hiddenSignName">
+											 <input type="hidden" name="finalApproval" value="${ list.get(0).FINAL_APPROVAL }" class="hiddenSignName">
+											 <input type="hidden" name="payWriter" value="${list.get(0).PAYMENT_WRITER}">
+                       <input type="hidden" name="payWriterNo" value="${list.get(0).PAYMENT_WRITER_NO}">
+                       <input type="hidden" name="modifyType" value="${type}">
 											 <input type="hidden" name="referrer" value="">
 											 <input type="hidden" name="referrerName" value="">
 		                   <div class="document">
@@ -643,7 +647,7 @@ $(document).on("click", "#okayBtn", function(){
 										                <tr>
 										                    <td class="label">기안자</td>
 										                    <td class="value" colspan="4">${member.get(0).userName}</td>
-										                    <input type="hidden" name="writerName" value="${member.get(0).userName}">
+										                    <input type="hidden" name="writerName" value="${list.get(0).PAYMENT_WRITER}">
 										                </tr>
 										                <tr>
 										                    <td class="label">기안일</td>
@@ -655,15 +659,15 @@ $(document).on("click", "#okayBtn", function(){
 										                    <td class="label">
 											                    승인자
 											                    <button data-izimodal-open="#modal" id="modal_btn">
-																					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+	                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
 																					  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
 																					  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
 																					</svg>
 	                                        </button>
 										                    </td>
-										                    <td class="value small sing_name" id="f_name"></td>
-										                    <td class="value small sing_name" id="m_name"></td>
-										                    <td class="value small sing_name" id="l_name"></td>
+										                    <td class="value small sing_name" id="f_name">${ list.get(0).FIRST_APPROVAL }</td>
+										                    <td class="value small sing_name" id="m_name">${ list.get(0).MIDDLE_APPROVAL }</td>
+										                    <td class="value small sing_name" id="l_name">${ list.get(0).FINAL_APPROVAL }</td>
 										                </tr>
 										                <tr>
 										                    <td class="label">
@@ -676,6 +680,7 @@ $(document).on("click", "#okayBtn", function(){
 	                                        </button>
 										                    </td>
 										                    <td  colspan="3" id="referrerTd">
+										                   
 										                    </td>
 										                </tr>
 										                <tr>
@@ -689,7 +694,7 @@ $(document).on("click", "#okayBtn", function(){
                                     </tr>
 										                <tr>
 										                    <td class="label">제목</td>
-										                    <td class="value" colspan="4"><input type="text" name="title" required></td>
+										                    <td class="value" colspan="4"><input type="text" name="title"  value="${ list.get(0).TITLE }" required></td>
 										                </tr>
 										            </table>
 										        </div>
@@ -699,7 +704,7 @@ $(document).on("click", "#okayBtn", function(){
                    					</div>
 										        <div class="content2">
 										            <table id="tr_table">
-										               <tr>
+										            	 <tr>
 	                                    <td class="label">품명</td>
 	                                    <td class="label">규격</td>
 	                                    <td class="label">수량</td>
@@ -707,39 +712,27 @@ $(document).on("click", "#okayBtn", function(){
 	                                    <td class="label">금액</td>
 	                                    <td class="label">비고</td>
                                 		</tr>
-										                <tr>
-	                                    <td class="value"><input type="text" name="pName" required></td>
-	                                    <td class="value"><input type="text" name="size"></td>
-	                                    <td class="value"><input type="number"  min="1" name="amount" required></td>
-	                                    <td class="value"><input type="text" name="unitPrice" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')" required></td>
-	                                    <td class="value"><input type="text" name="price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')" required></td>
-	                                    <td class="value"><input type="text" name="etc"></td>
-		                                </tr>
-		                                <tr>
-		                                    <td class="value"><input type="text" name="pName"></td>
-		                                    <td class="value"><input type="text" name="size"></td>
-		                                    <td class="value"><input type="number"  min="1" name="amount"></td>
-		                                    <td class="value"><input type="text" name="unitPrice" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></td>
-		                                    <td class="value"><input type="text" name="price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></td>
-		                                    <td class="value"><input type="text" name="etc"></td>
-		                                </tr>
-		                                <tr id="next_tr">
-		                                   	<td class="value"><input type="text" name="pName"></td>
-		                                    <td class="value"><input type="text" name="size"></td>
-		                                    <td class="value"><input type="number"  min="1" name="amount"></td>
-		                                    <td class="value"><input type="text" name="unitPrice" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></td>
-		                                    <td class="value"><input type="text" name="price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></td>
-		                                    <td class="value"><input type="text" name="etc"></td>
-		                                </tr>
+												            <c:forEach var="i" begin="0" end="${list.size() - 1}">
+																			<c:if test="${list[i].PRODUCT_NAME != null and !list[i].PRODUCT_NAME.equals('')}">
+			                                <tr>
+			                                    <td><input type="text" class="text_1" name="pName" value="${list.get(i).PRODUCT_NAME}"></td>
+			                                    <td><input type="text" class="text_2" name="size" value="${list.get(i).PRODUCT_SIZE}"></td>
+			                                    <td><input type="number"  min="1" class="text_3" name="amount" value="${list.get(i).QUANTITY}"></td>
+			                                    <td><input type="text" class="unitprice" name="unitPrice" value="${list.get(i).UNIT_PRICE}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></td>
+			                                    <td><input type="text" class="price" name="price" value="${list.get(i).PRICE}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></td>
+			                                    <td><input type="text" class="etc" name="etc" value="${list.get(i).NOTE}"></td>
+			                                </tr>
+																		   </c:if>			
+																		</c:forEach>
 										            </table>
 										            <table class="content2">
 		                                <tr>
 		                                    <td class="label">합계</td>
-		                                    <td><input type="text" name="totalSum" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')" required></td>
+		                                    <td><input type="text" name="totalSum" value="${ list.get(0).TOTAL_SUM }" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')" required></td>
 		                                </tr>
 		                                <tr>
 		                                    <td class="label">기타</td>
-		                                    <td><textarea id="" cols="30" rows="10" name="etcList"></textarea></td>
+		                                    <td><textarea id="" cols="30" rows="10" name="etcList">${ list.get(0).ETC_CONTENT }</textarea></td>
 		                                </tr>
                            			 </table>
 										        </div>
@@ -749,13 +742,14 @@ $(document).on("click", "#okayBtn", function(){
                             	 <button type="reset" class="btn btn-danger" id="reset_btn">초기화</button>
 										        </div>
 										    </div>
-										               
+										                        
+                        
+                        
                     </form>
                 </div>
             </div>
         </div>
         
-   
      <script>
      $(document).ready(function() {
          $(document).on('input', "input[name='amount'], input[name='unitPrice']", function() {
@@ -786,7 +780,7 @@ $(document).on("click", "#okayBtn", function(){
          updateTotalSum();
      });
     </script>
-		
+        
     <c:if test="${ not empty list }">
     <script>
     	$(document).ready(function(){
@@ -795,8 +789,27 @@ $(document).on("click", "#okayBtn", function(){
     	})
     </script>
     </c:if>
+    
+    <script>
+    	$(document).ready(function(){
+    		
+    		$(".unitprice").each(function(){
+    			$(this).val($(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    		})
+    		
+    		$(".price").each(function(){
+    			$(this).val($(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    		})
+    		
+    		
+    		$("input[name='totalSum']").val($("input[name='totalSum']").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+    	})
+    
+    
+    </script>
      
-   <script>
+    <script>
         document.querySelector("#myForm").addEventListener("submit", function(event) {
             if (confirm('정말로 제출하시겠습니까?')) {
                 let valid = true;
@@ -818,23 +831,18 @@ $(document).on("click", "#okayBtn", function(){
             }
         });
     </script>
-    
-     <script>
+    <script>
         $(document).ready(function() {
             $(document).on("click", "#plus_btn", function () {
-            	
                 var result = "<tr>";
-                result += "<td><input type='text' class='text_1' name='pName'></td>";
-                result += "<td><input type='text' class='text_2' name='size'></td>";
-                result += "<td><input type='number' min='1' class='text_3' name='amount'></td>";
-                result += '<td><input type="text" class="text_4" name="unitPrice" oninput="this.value = this.value.replace(/[^0-9]/g, \'\').replace(/\\d(?=(?:\\d{3})+$)/g, \'$&,\')"></td>';
-                result += '<td><input type="text" class="text_5" name="price" oninput="this.value = this.value.replace(/[^0-9]/g, \'\').replace(/\\d(?=(?:\\d{3})+$)/g, \'$&,\')"></td>';
-                result += "<td><input type='text' class='text_6' name='etc'></td>";
-                result += "</tr>";
-                
+		                result += "<td><input type='text' class='text_1' name='pName'></td>";
+		                result += "<td><input type='text' class='text_2' name='size'></td>";
+		                result += "<td><input type='number' min='1' class='text_3' name='amount'></td>";
+		                result += '<td><input type="text" class="text_4" name="unitPrice" oninput="this.value = this.value.replace(/[^0-9]/g, \'\').replace(/\\d(?=(?:\\d{3})+$)/g, \'$&,\')"></td>';
+		                result += '<td><input type="text" class="text_5" name="price" oninput="this.value = this.value.replace(/[^0-9]/g, \'\').replace(/\\d(?=(?:\\d{3})+$)/g, \'$&,\')"></td>';
+		                result += "<td><input type='text' class='text_6' name='etc'></td>";
+		                result += "</tr>";
                 $("#tr_table").append(result);
-                
-                updateTotalSum();
             });
             
             $(document).on("click", "#del_btn", function () {
@@ -845,12 +853,10 @@ $(document).on("click", "#okayBtn", function(){
                     alert("삭제할 행이 없습니다.");
                 }
             });
-            
         });
-        
-        
     </script>
-    
+   
+   
         
      <script>
         $('#modal').iziModal({
@@ -866,7 +872,7 @@ $(document).on("click", "#okayBtn", function(){
         
     </script>                            
                
-    <script>
+   <script>
         $('#modal2').iziModal({
         	title: '<h4 style="color:black">수신참조인</h4>',
             //subtitle: '수정도 가능합니다.',

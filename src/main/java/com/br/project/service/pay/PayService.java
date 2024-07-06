@@ -630,7 +630,7 @@ public class PayService {
 			result5 = payDao.updateGReport(map);
 		}
 		
-		return result1 * result2 * result3 * result5;
+		return result3;
 	}
 	
 	//최종승인완료
@@ -680,6 +680,10 @@ public class PayService {
 	
 	public List<Map<String, Object>> myReferrerList(int userNo, PageInfoDto pi){
 		return payDao.myReferrerList(userNo, pi);
+	}
+	
+	public int collectAp(int approvalNo) {
+		return payDao.collectAp(approvalNo);
 	}
 	
 }

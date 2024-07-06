@@ -651,7 +651,7 @@ $(document).on("click", "#rejectBtn", function(){
 	  
     
        $('#modal3').iziModal({
-           title: '반려된 사유.',
+           title: '<h4 style="color:black">반려 사유</h4>',
            headerColor: '#FEEFAD', // 헤더 색깔
            theme: '', //Theme of the modal, can be empty or "light".
            padding: '15px', // content안의 padding

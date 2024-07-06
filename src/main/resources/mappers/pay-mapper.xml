@@ -1425,6 +1425,7 @@
 				     , to_char(regist_date, 'YYYY-MM-DD') regist_date
 				     , to_char(FINAL_APPROVAL_DATE, 'YYYY-MM-DD') FINAL_APPROVAL_DATE
 				     , PAYMENT_STATUS
+				     , TITLE
 		  from approval A
       join member m on( USER_NO =  PAYMENT_WRITER_NO)
 		  WHERE DOCUMENT_STATUS IN ('I', 'D') 
@@ -1882,7 +1883,7 @@
 			     , TITLE
 			from approval A
 			WHERE A.STATUS = 'Y'
-				 AND DOCUMENT_STATUS IN ('Y', 'N', 'I', 'D')
+				 AND DOCUMENT_STATUS IN ('Y', 'N', 'I')
 				 AND (FIRST_APPROVAL = #{userName} and FIRST_APPROVAL_DATE is not null
       					or MIDDLE_APPROVAL = #{userName} and MIDDLE_APPROVAL_DATE is not null
       					or FINAL_APPROVAL = #{userName} and FINAL_APPROVAL_DATE is not null
@@ -3026,6 +3027,12 @@
 					) 
 				order
 					 by APPROVAL_NO desc
+   </select>
+   
+   <select id="collectAp">
+   		update approval
+   		   set DOCUMENT_STATUS = 'H'
+   		 where approval_no = #{approvalNo}
    </select>
 	 
 	 

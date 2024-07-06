@@ -164,6 +164,50 @@
 		    border-radius: 4px 0 0 4px;
 		    outline: none;
 		}
+		
+		.search-input:focus {
+		    border-color: #007BFF;
+		}
+		
+		.search-button {
+		    padding: 11px 20px;
+		    font-size: 11px;
+		    color: #fff;
+		    background-color: #007BFF;
+		    border: 2px solid #007BFF;
+		    border-radius: 0 4px 4px 0;
+		    cursor: pointer;
+		    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+		}
+		
+		.search-button:hover {
+		    background-color: #0056b3;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+		
+		.search-button:active {
+		    background-color: #003f7f;
+		    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+		.pagination li{padding: 6px 12px;}
+		.pagination a : hover{
+		background-color : #FEEFAD
+		};
+		
+		.search-container {
+		    display: flex;
+		    align-items: center;
+		}
+		
+		.search-input {
+		    width: 300px;
+		    padding: 10px;
+		    font-size: 16px;
+		    border: 2px solid #ccc;
+		    border-right: none;
+		    border-radius: 4px 0 0 4px;
+		    outline: none;
+		}
 		#search{
 		height: 63px;
 		height: 63px;
@@ -178,23 +222,23 @@
 		    padding: 5px 14px;
 		    font-size: 11px;
 		    color: #fff;
-		    background-color: #ff9800;
-		    border: 2px solid #ff9800;
+		    background-color: #f186aa;
+		    border: 2px solid #f186aa;
 		    border-radius: 3px;
 		    cursor: pointer;
 		    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 		    height: 49px;
-   			width: 61px;
+    		width: 61px;
 		}
 		
 		.search-button22:hover {
-		    background-color: #ff980082;;
+		    background-color: #f186aa8a;
 		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		    
 		}
 		
 		.search-button22:active {
-		    background-color: #ff980082;;
+		    background-color: #f186aa8a;
 		    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		}
 		
@@ -245,12 +289,9 @@
 .search-input:focus {
     border-color: #007bff;
 }
-
 </style>
 </head>
 <body>
-
-
 <script>
 $(document).ready(function(){
     $(".badge").each(function(){
@@ -270,112 +311,110 @@ $(document).ready(function(){
 
 <script>
 
-
-
 $(document).on('keyup', '#searches', function(e) {
 	
-		if(e.key == "Enter"){
-			 loadPageMyReject(1);
-		}
-   
+	if(e.key == "Enter"){
+		loadPageMyNoAprroval(1);
+	}
+
 });
 
 
 $(document).on('click', '#searchBtn', function(e) {
-	
-	loadPageMyReject(1);
-	
+
+	loadPageMyNoAprroval(1);
+
 });
 
 
 
 
 $(document).on('click', '.pages-link', function(e) {
-    e.preventDefault();
-    var page = parseInt($(this).data('page'));
-    if (page > 0) {
-    	loadPageMyReject(page);
-    }
+e.preventDefault();
+var page = parseInt($(this).data('page'));
+if (page > 0) {
+	loadPageMyNoAprroval(page);
+}
 });
 
-function loadPageMyReject(page) {
-	
-    $.ajax({
-        url: "${contextPath}/pay/ajaxMyRejectSearchApproval.do", 
-        method: 'GET',
-        data: { 
-        	page: page,
-        	keyword: $("#searches").val()
-        },
-        success: function(response) {
-          console.log(response);
-					
-          var tbody = $('#tStatus');
-          tbody.empty();
-        
-          if(Array.isArray(response.list) && response.list.length > 0){
-		
-					response.list.forEach(function(item) {
-		        console.log(item);
-		        
-	        var attachmentIcon = '';
-	        if (item.SALES_STATUS + item.DRAFT_STATUS + item.BUSINESSTRIP_STATUS > 0) {
-	            attachmentIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16" style="color: black;">' +
-	                             '<path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>' +
-	                             '</svg>';
-		      }
-	
-	        var row = '<tr onclick=location.href="${contextPath}/pay/detail.do?approvalNo=' + item.APPROVAL_NO  + '&documentNo=' + item.DOCUMENT_NUMBER + '&documentType=' + item.DOCUMENT_TYPE + '&payWriter=' + item.PAYMENT_WRITER + '&payWriterNo=' + item.PAYMENT_WRITER_NO + '">' +
-		                '<td><span class="badge rejected">' + item.DOCUMENT_STATUS + '</span></td>' +
-		                '<td>' + item.TITLE + attachmentIcon + '</td>' +
-		                '<td>' + item.DOCUMENT_TYPE + '</td>' +
-		                '<td>' + item.PAYMENT_WRITER + '</td>' +
-		                '<td>' + item.DEPARTMENT + '</td>' +
-		                '<td>' + item.REGIST_DATE + '</td>' +
-		                '<td>' + (item.DOCUMENT_STATUS == '완료' ? item.FINAL_APPROVAL_DATE : "-") + '</td>' +
-		                '</tr>';
-	
-      			 tbody.append(row);
-	        });
-					var ul = $('.pagination');
-					ul.empty(); 
+function loadPageMyNoAprroval(page) {
 
-					ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="pages-link" data-page="' + (response.pi.currentPage == 1 ? 0 : response.pi.currentPage - 1) + '">◁</a></li>');
-					
-					for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-					    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="pages-link" data-page="' + p + '">' + p + '</a></li>');
-					}
+$.ajax({
+    url: "${contextPath}/pay/ajaxMyNoSignSearchApproval.do", 
+    method: 'GET',
+    data: { 
+    	page: page,
+    	keyword: $("#searches").val()
+    },
+    success: function(response) {
+      console.log(response);
 
-					ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="pages-link" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
-					
-					}else {
-						 var row = '<tr>' +
-                      '<td colspan="7">존재하는 게시글이 없습니다.</td>' +
-                      '</tr>';
-						 tbody.append(row);
-						 var ul = $('.pagination');
-						 ul.empty();
-					}
+      var tbody = $('#tStatus');
+      tbody.empty();
     
-         },
-         error: function(xhr, status, error) {
-             console.log("AJAX request failed");
-         }
-      });
-            
-          
-         
-          
-    }
-  
+      if(Array.isArray(response.list) && response.list.length > 0){
+	
+			response.list.forEach(function(item) {
+        console.log(item);
+        
+        var documentStatusClass = '';
+        
+			  if (item.DOCUMENT_STATUS === '진행') {
+			      documentStatusClass = 'progresses';
+			  } else if (item.DOCUMENT_STATUS === '대기') {
+			      documentStatusClass = 'pending';
+			  }
+		  
+        var attachmentIcon = '';
+        if (item.SALES_STATUS + item.DRAFT_STATUS + item.BUSINESSTRIP_STATUS > 0) {
+            attachmentIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16" style="color: black;">' +
+                             '<path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>' +
+                             '</svg>';
+        }
+
+        var row = '<tr onclick=location.href="${contextPath}/pay/detail.do?approvalNo=' + item.APPROVAL_NO  + '&documentNo=' + item.DOCUMENT_NUMBER + '&documentType=' + item.DOCUMENT_TYPE + '&payWriter=' + item.PAYMENT_WRITER + '&payWriterNo=' + item.PAYMENT_WRITER_NO + '">' +
+	                '<td><span class="badge '+ documentStatusClass +'">' + item.DOCUMENT_STATUS + '</span></td>' +
+	                '<td>' + item.TITLE + attachmentIcon + '</td>' +
+	                '<td>' + item.DOCUMENT_TYPE + '</td>' +
+	                '<td>' + item.PAYMENT_WRITER + '</td>' +
+	                '<td>' + item.DEPARTMENT + '</td>' +
+	                '<td>' + item.REGIST_DATE + '</td>' +
+	                '<td>' + (item.DOCUMENT_STATUS == '완료' ? item.FINAL_APPROVAL_DATE : "-") + '</td>' +
+	                '</tr>';
+
+  			 tbody.append(row);
+        });
+				var ul = $('.pagination');
+				ul.empty(); 
+
+				ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="pages-link" data-page="' + (response.pi.currentPage == 1 ? 0 : response.pi.currentPage - 1) + '">◁</a></li>');
+				
+				for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
+				    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="pages-link" data-page="' + p + '">' + p + '</a></li>');
+				}
+
+				ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="pages-link" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
+				
+				}else {
+					 var row = '<tr>' +
+                  '<td colspan="7">존재하는 게시글이 없습니다.</td>' +
+                  '</tr>';
+					 tbody.append(row);
+					 var ul = $('.pagination');
+					 ul.empty();
+				}
+
+     },
+     error: function(xhr, status, error) {
+         console.log("AJAX request failed");
+     }
+  });
+        
+      
+     
+      
+}
 </script>
-
-
-
-
-
-
-
 
 
 
@@ -389,9 +428,9 @@ function loadPageMyReject(page) {
 	            
 							
 							<div class="content2">
-							   <h2>${ userName }님의 반려함</h2>
+							   <h2>${ userName }님의 결재대기함</h2>
 							    <div class="d-flex justify-content-between align-items-center mb-3">
-											<div class="search-container">
+											 <div class="search-container">
 							            <input type="text" class="search-input" id="searches" placeholder="검색어를 입력하세요...">
 							            <button type="button" class="search-button22" id="searchBtn">
 							            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -414,48 +453,46 @@ function loadPageMyReject(page) {
 							        </thead>
 							        <tbody id="tStatus">
 							        		<c:choose>
-												    <c:when test="${ list != null and !list.isEmpty() }">
-												        <c:forEach var="i" items="${ list }">
-												            <tr onclick="location.href='${contextPath}/pay/detail.do?approvalNo=${ i.APPROVAL_NO }&documentNo=${ i.DOCUMENT_NUMBER }&documentType=${ i.DOCUMENT_TYPE }&payWriter=${ i.PAYMENT_WRITER }&payWriterNo=${ i.PAYMENT_WRITER_NO }';">
-												                <td><span class="badge">${ i.DOCUMENT_STATUS }</span></td>
-												                <td>${ i.TITLE }
-												                    <c:if test="${ i.SALES_STATUS + i.DRAFT_STATUS + i.BUSINESSTRIP_STATUS == 1 }">
-												                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16" style="color: black;">
-												                            <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
-												                        </svg>
-												                    </c:if>
-												                </td>
-												                <td>${ i.DOCUMENT_TYPE }</td>
-												                <td>${ i.PAYMENT_WRITER }</td>
-												                <td>${ i.DEPARTMENT }</td>
-												                <td>${ i.REGIST_DATE }</td>
-												                <td>${ i.FINAL_APPROVAL_DATE == null ? "-" : i.FINAL_APPROVAL_DATE}</td>
-												            </tr>
-												        </c:forEach>
-												    </c:when>
-												    <c:otherwise>
-												        <tr>
-												            <td colspan="7">존재하는 게시글이 없습니다.</td>
-												        </tr>
-												    </c:otherwise>
-												</c:choose>
+							        		<c:when test="${ list != null and !list.isEmpty() }">
+							        		<c:forEach var="i" items="${ list }">							        		
+								          	<tr onclick="location.href='${contextPath}/pay/detail.do?approvalNo=${ i.APPROVAL_NO  }&documentNo=${ i.DOCUMENT_NUMBER }&documentType=${ i.DOCUMENT_TYPE }&payWriter=${ i.PAYMENT_WRITER  }&payWriterNo=${ i.PAYMENT_WRITER_NO }';">
+								                <td><span class="badge">${ i.DOCUMENT_STATUS }</span></td>
+								                <td>${ i.TITLE }
+								                		${ i.SALES_STATUS + i.DRAFT_STATUS + i.BUSINESSTRIP_STATUS == 1 ? '<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16" style="color: black;">
+					                             <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+					                             </svg>' : ""}
+								                </td>
+								                <td>${ i.DOCUMENT_TYPE }</td>
+								                <td>${ i.PAYMENT_WRITER }</td>
+								                <td>${ i.DEPARTMENT }</td>
+								                <td>${ i.REGIST_DATE }</td>
+								                <td>${ i.FINAL_APPROVAL_DATE == null ? "-" : i.FINAL_APPROVAL_DATE}</td>
+								            </tr>
+							            </c:forEach>
+							            </c:when>
+							            <c:otherwise>
+							             	<tr>
+			                      	<td colspan="7">존재하는 게시글이 없습니다.</td>
+			                      </tr>
+							            </c:otherwise>
+							            </c:choose>
 							        </tbody>
 							    </table>
 							    <div id="cen_bottom_pagging">
 										<div id="pagin_form">
 											<ul class="pagination">
-						     					<c:if test="${ list != null && !list.isEmpty()}">
-						              	<li class="page-item ${ pi.currentPage == 1 ? 'disabled' : '' }"><a class="page-link" href="${ contextPath }/pay/rejectApprovalList.page?page=${pi.currentPage-1}">◁</a></li>
-						     
+			        					<c:if test="${ list != null && !list.isEmpty()}">
+					               	<li class="page-item ${ pi.currentPage == 1 ? 'disabled' : '' }"><a href="${ contextPath }/pay/noApprovalList.page?page=${pi.currentPage-1}">◁</a></li>
+					      
 										      <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										       	<li class="page-item ${ pi.currentPage == p ? 'disabled active' : '' }"><a class="page-link" href="${ contextPath }/pay/rejectApprovalList.page?page=${p}">${ p }</a></li>
+										       	<li class="page-item ${ pi.currentPage == p ? 'disabled' : '' }"><a href="${ contextPath }/pay/noApprovalList.page?page=${p}">${ p }</a></li>
 										      </c:forEach>
-						     
-										      <li class="page-item ${ pi.currentPage == pi.maxPage ? 'disabled' : '' }"><a class="page-link" href="${ contextPath }/pay/rejectApprovalList.page?page=${pi.currentPage+1}">▷</a></li>
+					      
+										      <li class="page-item ${ pi.currentPage == pi.maxPage ? 'disabled' : '' }"><a href="${ contextPath }/pay/noApprovalList.page?page=${pi.currentPage+1}">▷</a></li>
 									   		</c:if>
 									   	</ul>
-						         </div>
-						      </div>
+					          </div>
+				        	</div>
 							</div>
 						</div>
 					</div>

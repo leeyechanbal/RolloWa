@@ -109,61 +109,65 @@ $(document).ready(function(){
 $(document).on("click", "#rejectBtn", function(){
 		
 	 	var approvalName = "${list.get(0).FIRST_APPROVAL == userName ? 1 : list.get(0).MIDDLE_APPROVAL == userName ? 2 : list.get(0).FINAL_APPROVAL == userName ? 3 : 0}" 
-  	  
-	  if(confirm("정말로 반려하시겠습니까?")){
-			$.ajax({
-			  url:"${contextPath}/pay/ajaxReject.do",
-			  type:"post",
-			  data:{
-				  approvalNo:"${list.get(0).APPROVAL_NO}",
-					content:$("#calcellation").val(),
-					approvalSignNo:approvalName
-			  },
-			  success:function(list){
-				  
-				  console.log(list);
-				  if(list[1].approvalSignNo == "1"){
-					  alert("반려가 완료되었습니다.");
-					  $("#firstSign").children().remove();
-					  $("#apDt1").children().remove();
-					  $("#firstSign").append().html('<h1 style="color: red;" class="rejects" id="rejectCheck1">반려</h1>');
-						  if($("#apDt1").text() == ""){
-				        	$("#apDt1").append(list[0].firstApDt);	
-		        	}
-					  $("#approvalSt").empty();
-						$("#approvalSt").text("반려");	
-							
-				  }else if(list[1].approvalSignNo == "2"){
-					  alert("반려가 완료되었습니다.");
-					  $("#middleSign").children().remove();
-					  $("#apDt2").children().remove();
-					  $("#middleSign").append().html('<h1 style="color: red;" class="rejects" id="rejectCheck2">반려</h1>');
-						  if($("#apDt2").text() == ""){
-		        		$("#apDt2").append(list[0].middleApDt);	
-	    		  	}
-						  $("#approvalSt").empty();
-							$("#approvalSt").text("반려");  
-							
-				  }else{
-					  alert("반려가 완료되었습니다.");
-					  $("#finalSign").children().remove();
-					  $("#apDt3").children().remove();
-					  $("#finalSign").append().html('<h1 style="color: red;" class="rejects" id="rejectCheck3">반려</h1>');
-						  if($("#apDt3").text() == ""){
-		        		$("#apDt3").append(list[0].finalApDt);	
-	    		  	}
-						  $("#approvalSt").empty();
-						  $("#approvalSt").text("반려"); 
-					 }
-				  $("#modal").iziModal('close');
+  	if($("#calcellation").text().trim() == ""){
+  		alert("반려 사유를 작성해주세요.");
+  	}else{
+  		if(confirm("정말로 반려하시겠습니까?")){
+				$.ajax({
+				  url:"${contextPath}/pay/ajaxReject.do",
+				  type:"post",
+				  data:{
+					  approvalNo:"${list.get(0).APPROVAL_NO}",
+						content:$("#calcellation").val(),
+						approvalSignNo:approvalName
+				  },
+				  success:function(list){
 					  
-				  }
-				
-			  
-			  
-		  })
+					  console.log(list);
+					  if(list[1].approvalSignNo == "1"){
+						  alert("반려가 완료되었습니다.");
+						  $("#firstSign").children().remove();
+						  $("#apDt1").children().remove();
+						  $("#firstSign").append().html('<h1 style="color: red;" class="rejects" id="rejectCheck1">반려</h1>');
+							  if($("#apDt1").text() == ""){
+					        	$("#apDt1").append(list[0].firstApDt);	
+			        	}
+						  $("#approvalSt").empty();
+							$("#approvalSt").text("반려");	
+								
+					  }else if(list[1].approvalSignNo == "2"){
+						  alert("반려가 완료되었습니다.");
+						  $("#middleSign").children().remove();
+						  $("#apDt2").children().remove();
+						  $("#middleSign").append().html('<h1 style="color: red;" class="rejects" id="rejectCheck2">반려</h1>');
+							  if($("#apDt2").text() == ""){
+			        		$("#apDt2").append(list[0].middleApDt);	
+		    		  	}
+							  $("#approvalSt").empty();
+								$("#approvalSt").text("반려");  
+								
+					  }else{
+						  alert("반려가 완료되었습니다.");
+						  $("#finalSign").children().remove();
+						  $("#apDt3").children().remove();
+						  $("#finalSign").append().html('<h1 style="color: red;" class="rejects" id="rejectCheck3">반려</h1>');
+							  if($("#apDt3").text() == ""){
+			        		$("#apDt3").append(list[0].finalApDt);	
+		    		  	}
+							  $("#approvalSt").empty();
+							  $("#approvalSt").text("반려"); 
+						 }
+					  $("#modal").iziModal('close');
+						  
+					  }
+					
+				  
+				  
+			  })
 		  
-	  }
+	  	}
+  	}
+	  
 	  
 	  
 })
@@ -324,6 +328,11 @@ $(document).on("click", "#rejectBtn", function(){
             </table>
 					       </div>
 					      			<div id="modifybtn">
+					      				<!-- 
+					      					<c:if test="${ list.get(0).DOCUMENT_STATUS == 'D' }">
+					      						<button type="button" class="btn btn-success" id="collect">회수</button>
+					      					</c:if>
+					      			 	-->
 					           			<c:choose>
 					      						<c:when test="${ list.get(0).DOCUMENT_STATUS == 'D' ||  list.get(0).DOCUMENT_STATUS == 'I' && list.get(0).PAYMENT_WRITER_NO == userNo}">
 						           				<button class="btn btn-warning" class="modifyWriter" id=correction type="submit">수정</button>
@@ -389,13 +398,22 @@ $(document).on("click", "#rejectBtn", function(){
 		    <!-------------- 승인자 반려 사유 작성 모달 ------------->
     		<div id="modal">
 		        <div class="m_content_style">
-		            내용 : <textarea style="height: 300px; resize: none;" name="calcellation" id="calcellation" placeholder="자세하게 작성해주세요." required></textarea>
+		            <textarea style="height: 300px; resize: none;" name="calcellation" id="calcellation" placeholder="사유를 자세하게 작성해주세요." required></textarea>
 				        <div style="display: flex; justify-content: end; align-items: end; margin: 10px;">
 				        	<button class="btn btn-danger" id="rejectBtn">확인</button>
 				        </div>
 		        </div>
 		    </div>
 		    <!---------------------------------------------->
+		<script>
+		$("#collect").on("click", function(){
+				
+				if(confirm("회수 하시겠습니까?")){
+					location.href = "${contextPath}/pay/collectAp.do?approvalNo=" + ${ list.get(0).APPROVAL_NO };
+				}
+					
+		})
+		</script>
 	
 		<script>
        $(document).ready(function() {
@@ -448,7 +466,7 @@ $(document).on("click", "#rejectBtn", function(){
 		   
     	$(document).ready(function() {
         $("#deldo").on("click", function(){
-            var isDeletable = "${ list.get(0).DOCUMENT_STATUS == 'D' && userNo == list.get(0).PAYMENT_WRITER_NO }";
+            var isDeletable = "${ list.get(0).DOCUMENT_STATUS == 'D' || list.get(0).DOCUMENT_STATUS == 'N' && userNo == list.get(0).PAYMENT_WRITER_NO }";
             if(isDeletable == 'true') {
             	
                 if(confirm("정말로 삭제하시겠습니까?")) {

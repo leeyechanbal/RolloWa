@@ -553,6 +553,9 @@ public class PayDao {
 		return sqlSessionTemplate.selectList("payMapper.ajaxMyReferrerList", map, rowBounds);
 	}
 	
+	public int collectAp(int approvalNo) {
+		return sqlSessionTemplate.update("payMapper.collectAp", approvalNo);
+	}
 	
 	
 }

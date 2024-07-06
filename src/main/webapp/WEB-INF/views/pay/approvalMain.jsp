@@ -267,7 +267,7 @@
 		.pagination li:hover {
 			cursor: pointer;
 		}
-		.pagination li{padding: 6px 12px;}
+		/*.pagination li{padding: 6px 12px;}*/
 	
 		/* 기본 스타일 설정 */
 		.custom-select {
@@ -971,7 +971,6 @@ $(document).on('click', '.page-linkc', function(event) {
     }
 });
 
-
 </script>
 
  <script>
@@ -1301,7 +1300,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-link7" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-link7" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-link7" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-link7" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -1604,7 +1603,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-link7s" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-link7s" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-link7s" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-link7s" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -1751,7 +1750,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkd" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkd" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkd" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkd" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -1890,7 +1889,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkall" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkall" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkall" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkall" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -2037,7 +2036,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkallc" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkallc" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkallc" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkallc" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -2190,7 +2189,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkalls" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkalls" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkalls" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkalls" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -2334,7 +2333,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linku" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linku" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linku" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linku" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -2485,7 +2484,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkuc" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkuc" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkuc" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkuc" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -2634,7 +2633,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkus" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkus" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkus" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkus" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -2776,7 +2775,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkn" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkn" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkn" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkn" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -2928,7 +2927,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linknc" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linknc" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linknc" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linknc" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -3078,7 +3077,7 @@ $(document).on('click', '.page-linkc', function(event) {
 										ul.append('<li class="page-item ' + (response.pi.currentPage == 1 ? 'disabled' : '') + '"><a class="page-linkns" data-page="' + (response.pi.currentPage - 1) + '">◁</a></li>');
 					
 										for (var p = response.pi.startPage; p <= response.pi.endPage; p++) {
-										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled' : '') + '"><a class="page-linkns" data-page="' + p + '">' + p + '</a></li>');
+										    ul.append('<li class="page-item ' + (response.pi.currentPage == p ? 'disabled active' : '') + '"><a class="page-linkns" data-page="' + p + '">' + p + '</a></li>');
 										}
 					
 										ul.append('<li class="page-item ' + (response.pi.currentPage == response.pi.maxPage ? 'disabled' : '') + '"><a class="page-linkns" data-page="' + (response.pi.currentPage == response.pi.maxPage ? 0 : response.pi.currentPage + 1) + '">▷</a></li>');
@@ -3180,7 +3179,7 @@ $(document).on('click', '.page-linkc', function(event) {
 						    <!-- Highlighted Boxes -->
 						    <div class="highlight-boxes">
 						    		<div class="highlight-box" id="noApprovalSignList">
-						            <div class="title"><h5>${ userName }님의 결재대기 문서함</h5></div>  
+						            <div class="title"><h5>${ userName }님의 결재대기함</h5></div>  
 						            <div class="count">
 							            <h4>${ noApprovalSignCount }건</h4>
 						            </div>
@@ -3289,20 +3288,24 @@ $(document).on('click', '.page-linkc', function(event) {
 												    </table>
 												    
 														    	<div id="cen_bottom_pagging">
-																			<div id="pagin_form">
-																				<ul class="pagination">
-												        					<c:if test="${ list != null && !list.isEmpty()}">
-														               	<li class="page-item ${ pi.currentPage == 1 ? 'disabled' : '' }"><a href="${ contextPath }/pay/noApprovalListMain.page?page=${pi.currentPage-1}">◁</a></li>
-														      
-																			      <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-																			       	<li class="page-item ${ pi.currentPage == p ? 'disabled' : '' }"><a href="${ contextPath }/pay/noApprovalListMain.page?page=${p}">${ p }</a></li>
-																			      </c:forEach>
-														      
-																			      <li class="page-item ${ pi.currentPage == pi.maxPage ? 'disabled' : '' }"><a href="${ contextPath }/pay/noApprovalListMain.page?page=${pi.currentPage+1}">▷</a></li>
-																		   		</c:if>
-																		   	</ul>
-														          </div>
-													        </div>
+																	  <div id="pagin_form">
+																	    <ul class="pagination">
+																	      <c:if test="${ list != null && !list.isEmpty()}">
+																	        <li class="page-item ${ pi.currentPage == 1 ? 'disabled' : '' }">
+																	          <a class="page-link" href="${ contextPath }/pay/noApprovalListMain.page?page=${pi.currentPage-1}">◁</a>
+																	        </li>
+																	        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+																	          <li class="page-item ${ pi.currentPage == p ? 'disabled active' : '' }">
+																	            <a class="page-link" href="${ contextPath }/pay/noApprovalListMain.page?page=${p}">${ p }</a>
+																	          </li>
+																	        </c:forEach>
+																	        <li class="page-item ${ pi.currentPage == pi.maxPage ? 'disabled' : '' }">
+																	          <a class="page-link" href="${ contextPath }/pay/noApprovalListMain.page?page=${pi.currentPage+1}">▷</a>
+																	        </li>
+																	      </c:if>
+																	    </ul>
+																	  </div>
+																	</div>
 										         </div>
 										     </div>
 						        </div>
